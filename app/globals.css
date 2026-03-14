@@ -27,15 +27,15 @@
     --secondary: #ea580c;
     --accent: #db2777;
     --background: #fdfaf6;
-    --surface: #FFFFFF;
+    --surface: #ffffff;
     --text-primary: #121212;
     --text-muted: #52525b;
-    --shadow: #000000;
+    --shadow: rgba(0, 0, 0, 0.1);
     --border-color: #000000;
   }
 
   :root.dark,
-  [data-theme="dark"] {
+  [data-theme='dark'] {
     --primary: #a78bfa;
     --secondary: #fb923c;
     --accent: #f472b6;
@@ -43,8 +43,13 @@
     --surface: #18181b;
     --text-primary: #f4f4f5;
     --text-muted: #a1a1aa;
-    --shadow: #000000;
+    --shadow: rgba(0, 0, 0, 0.6);
     --border-color: #52525b;
+  }
+
+  /* Smooth Theme Transition */
+  body {
+    transition: background-color 0.4s cubic-bezier(0.4, 0, 0.2, 1), color 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   }
 
   *,

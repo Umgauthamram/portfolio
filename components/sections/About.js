@@ -45,11 +45,10 @@ export default function About({ personalInfo }) {
         <section id="about" ref={sectionRef} className="pb-24 max-w-[1400px] mx-auto px-6 relative z-10 -mt-24 lg:-mt-40">
 
             {/* Stat Cards Row Overlapping Hero */}
-            <div className="stats-container grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 w-full mb-32 z-20 relative">
-                <StatCard count="4+" label="Production Projects" icon="🚀" />
-                <StatCard count="2+" label="Work Experiences" icon="⚡" />
-                <StatCard count="3+" label="Hackathons Won" icon="🏆" />
-                <StatCard count="10K+" label="Lines of Code" icon="💻" />
+            <div className="stats-container grid grid-cols-1 md:grid-cols-3 gap-6 w-full max-w-5xl mx-auto mb-32 z-20 relative">
+                <StatCard count="5+" label="Production Projects" icon="🚀" />
+                <StatCard count="3+" label="Hackathons Participated" icon="🏆" />
+                <StatCard count="10+" label="Events Participated" icon="🎫" />
             </div>
 
             <div className="about-title text-center max-w-5xl mx-auto mb-24 cursor-default">
@@ -72,7 +71,7 @@ export default function About({ personalInfo }) {
                                 <div className="w-4 h-4 rounded-full bg-[#F5A623] border border-black/20 text-xs flex items-center justify-center font-bold">-</div>
                                 <div className="w-4 h-4 rounded-full bg-[var(--color-secondary)] border border-black/20 text-xs flex items-center justify-center font-bold">+</div>
                             </div>
-                            <div className="mx-auto font-[var(--font-code)] font-bold text-sm tracking-widest text-[#FFF5F0]">GUEST@GAUTHAM: ~</div>
+                            <div className="mx-auto font-[var(--font-code)] font-bold text-sm tracking-widest text-[#FFF5F0]">gautham@ram: ~</div>
                         </div>
                         {/* Terminal Body */}
                         <div className="p-8 lg:p-12 font-[var(--font-code)] text-sm md:text-base lg:text-lg text-[var(--color-text-primary)] space-y-1 bg-[var(--color-background)]">

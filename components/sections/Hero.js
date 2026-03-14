@@ -12,52 +12,69 @@ export default function Hero({ personalInfo }) {
                 {/* Absolute Background Elements */}
                 <ParticleNetwork />
 
-                <div className="relative z-10 w-full flex flex-col-reverse lg:flex-row items-center justify-between gap-12 p-8 md:p-16 lg:p-24">
+                <div className="relative z-10 w-full flex flex-col items-start gap-12 p-8 md:p-16 lg:p-24">
 
-                    {/* Left Content */}
-                    <div className="flex-1 flex flex-col items-start gap-8 w-full max-w-2xl">
-                        <div className="neo-badge text-white bg-[var(--color-border)] border-white/20 shadow-none">
-                            {personalInfo.tagline}
+                    {/* Top Section: Catchy Headers */}
+                    <div className="w-full flex flex-col md:flex-row items-end justify-between gap-8">
+                        <div className="flex flex-col items-start gap-6">
+                            <div className="neo-badge text-white bg-[var(--color-border)] border-white/20 shadow-none">
+                                {personalInfo.tagline}
+                            </div>
+
+                            <h1 className="text-4xl md:text-6xl lg:text-8xl font-[var(--font-heading)] font-black text-white leading-[1] drop-shadow-lg uppercase tracking-tighter">
+                                The hype <br className="hidden md:block" />
+                                is <span className="text-[#FFFBED]">real.</span>
+                            </h1>
                         </div>
 
-                        <h1 className="text-5xl md:text-7xl lg:text-8xl font-[var(--font-heading)] font-black text-white leading-[1.05] drop-shadow-lg">
-                            The hype <br /> is <span className="text-[#FFFBED]">real.</span><br />
-                        </h1>
-
-                        <div className="text-3xl md:text-4xl font-[var(--font-heading)] font-bold text-white/90 drop-shadow-md h-20">
+                        <div className="text-2xl md:text-3xl lg:text-4xl font-[var(--font-heading)] font-bold text-white drop-shadow-md md:text-right pb-2">
                             I am a{" "}
                             <TypeAnimation
                                 sequence={[
                                     "Full-Stack Dev.", 1000,
-                                    "Blockchain Eng.", 1000,
+                                    "Blockchain Engineer.", 1000,
                                     "Web3 Builder.", 1000,
                                     "AI Integrator.", 1000
                                 ]}
                                 wrapper="span"
                                 speed={50}
-                                className="text-[#121212] bg-[#FFFBED] px-2"
+                                className="text-[var(--color-text-primary)] bg-[var(--color-surface)] px-2"
                                 repeat={Infinity}
                             />
                         </div>
-
-                        <p className="text-lg md:text-xl text-white font-medium max-w-xl leading-relaxed drop-shadow-sm">
-                            {personalInfo.bio}
-                        </p>
-
-                        <div className="flex flex-wrap gap-4 mt-4 w-full">
-                            <a href="#projects" className="neo-btn bg-[#121212] text-white border-[#121212] hover:bg-white hover:text-[#121212] text-lg px-8 py-4 w-full md:w-auto">
-                                View Projects
-                            </a>
-                            <a href="/resume.pdf" className="neo-btn-outline bg-white/20 backdrop-blur-sm border-white text-white hover:bg-white hover:text-black text-lg px-8 py-4 w-full md:w-auto">
-                                Download Resume
-                            </a>
-                        </div>
                     </div>
 
-                    {/* Right Character */}
-                    <div className="flex-1 flex justify-center lg:justify-end w-full max-w-lg lg:max-w-xl relative">
-                        <div className="relative w-full h-full object-contain filter drop-shadow-[0_10px_20px_rgba(0,0,0,0.5)]">
-                            <DeveloperCharacter className="w-full h-auto" />
+                    {/* Bottom Section: Bio and Character */}
+                    <div className="w-full flex flex-col-reverse lg:flex-row items-center justify-between gap-12">
+                        {/* Bio side */}
+                        <div className="flex-1 w-full max-w-2xl">
+                            <div className="bg-[var(--color-surface)]/10 backdrop-blur-md rounded-3xl p-8 border-2 border-white/20 shadow-xl dark:bg-black/20">
+                                <div className="flex items-center gap-3 mb-4">
+                                    <div className="h-[2px] w-8 bg-[var(--color-primary)]"></div>
+                                    <span className="text-sm font-black uppercase text-white/80 tracking-[0.3em] font-[var(--font-code)]">
+                                        Who am I?
+                                    </span>
+                                </div>
+                                <p className="text-lg md:text-xl text-white font-medium leading-relaxed drop-shadow-sm opacity-95">
+                                    {personalInfo.bio}
+                                </p>
+
+                                <div className="flex flex-wrap gap-4 mt-10">
+                                    <a href="#projects" className="neo-btn bg-[var(--color-text-primary)] text-[var(--color-background)] border-[var(--color-text-primary)] hover:bg-[var(--color-primary)] hover:text-white text-lg px-8 py-4">
+                                        View Projects
+                                    </a>
+                                    <a href="/Gautham Ram U M.pdf" download="Gautham Ram U M Resume" className="neo-btn-outline bg-white/20 backdrop-blur-sm border-white text-white hover:bg-white hover:text-black text-lg px-8 py-4">
+                                        Resume
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+
+                        {/* Character side */}
+                        <div className="flex-1 flex justify-center lg:justify-end w-full max-w-lg">
+                            <div className="relative w-full h-full filter drop-shadow-[0_20px_30px_rgba(0,0,0,0.4)]">
+                                <DeveloperCharacter className="w-full h-auto scale-110 lg:scale-125" />
+                            </div>
                         </div>
                     </div>
 

@@ -4,7 +4,7 @@ export default function Footer() {
             <div className="max-w-[1400px] mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-6">
 
                 <div className="text-4xl font-[var(--font-heading)] font-black text-[var(--color-text-primary)] tracking-tighter">
-                    GR<span className="text-[var(--color-primary)]">.</span>
+                    Gautham Ram<span className="text-[var(--color-primary)]">.</span>
                 </div>
 
                 <p className="text-[var(--color-text-primary)] font-bold text-lg md:-ml-8">
