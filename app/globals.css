@@ -1,26 +1,167 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+@custom-variant dark (&:where(.dark, .dark *));
 
-@theme inline {
+@theme {
+  --color-primary: var(--primary);
+  --color-secondary: var(--secondary);
+  --color-accent: var(--accent);
   --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-surface: var(--surface);
+  --color-text-primary: var(--text-primary);
+  --color-text-muted: var(--text-muted);
+  --color-shadow: var(--shadow);
+  --color-border: var(--border-color);
+
+  --font-heading: var(--font-space-grotesk);
+  --font-body: var(--font-inter);
+  --font-code: var(--font-jetbrains-mono);
+
+  --animate-spin-slow: spin 20s linear infinite;
+  --animate-pulse-slow: pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite;
 }
 
-@media (prefers-color-scheme: dark) {
+@layer base {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --primary: #7c3aed;
+    --secondary: #ea580c;
+    --accent: #db2777;
+    --background: #fdfaf6;
+    --surface: #FFFFFF;
+    --text-primary: #121212;
+    --text-muted: #52525b;
+    --shadow: #000000;
+    --border-color: #000000;
+  }
+
+  :root.dark,
+  [data-theme="dark"] {
+    --primary: #a78bfa;
+    --secondary: #fb923c;
+    --accent: #f472b6;
+    --background: #09090b;
+    --surface: #18181b;
+    --text-primary: #f4f4f5;
+    --text-muted: #a1a1aa;
+    --shadow: #000000;
+    --border-color: #52525b;
+  }
+
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+  }
+
+  html,
+  body {
+    width: 100%;
+    min-height: 100%;
+    overflow-x: hidden;
+    scroll-behavior: smooth;
+    font-family: var(--font-body), sans-serif;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: var(--font-heading), sans-serif;
+  }
+
+  code,
+  pre,
+  .terminal-text {
+    font-family: var(--font-code), monospace;
   }
 }
 
-body {
+::selection {
+  background-color: var(--primary);
+  color: #fff;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
   background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--text-primary);
+  border-radius: 4px;
+}
+
+.neo-card {
+  background-color: var(--color-surface);
+  border: 3px solid var(--color-border);
+  border-radius: 1.5rem;
+  box-shadow: 6px 6px 0px 0px var(--color-shadow);
+  transition: transform 0.2s, box-shadow 0.2s;
+  color: var(--color-text-primary);
+}
+
+.neo-card:hover {
+  transform: translate(-3px, -3px);
+  box-shadow: 9px 9px 0px 0px var(--color-shadow);
+}
+
+.neo-btn {
+  background-color: var(--color-primary);
+  color: #fff;
+  border: 2px solid var(--color-border);
+  border-radius: 9999px;
+  font-weight: 700;
+  padding: 0.75rem 1.5rem;
+  box-shadow: 4px 4px 0px 0px var(--color-shadow);
+  transition: transform 0.2s, box-shadow 0.2s, background-color 0.2s;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.neo-btn:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: 6px 6px 0px 0px var(--color-shadow);
+  background-color: var(--color-accent);
+}
+
+.neo-btn-outline {
+  background-color: var(--color-surface);
+  color: var(--color-text-primary);
+  border: 2px solid var(--color-border);
+  border-radius: 9999px;
+  font-weight: 700;
+  padding: 0.75rem 1.5rem;
+  box-shadow: 3px 3px 0px 0px var(--color-shadow);
+  transition: transform 0.2s, box-shadow 0.2s;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.neo-btn-outline:hover {
+  background-color: var(--color-background);
+  transform: translate(-2px, -2px);
+  box-shadow: 5px 5px 0px 0px var(--color-shadow);
+}
+
+.neo-badge {
+  background-color: var(--color-surface);
+  border: 2px solid var(--color-border);
+  border-radius: 9999px;
+  box-shadow: 2px 2px 0px 0px var(--color-shadow);
+  color: var(--color-text-primary);
+  font-weight: 700;
+  padding: 0.25rem 0.75rem;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  display: inline-block;
 }
