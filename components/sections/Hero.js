@@ -31,7 +31,7 @@ export default function Hero({ personalInfo }) {
                             I am a{" "}
                             <TypeAnimation
                                 sequence={[
-                                    "Full-Stack Dev.", 1000,
+                                    "Web dev & Andriod APP dev Dev.", 1000,
                                     "Blockchain Engineer.", 1000,
                                     "Web3 Builder.", 1000,
                                     "AI Integrator.", 1000

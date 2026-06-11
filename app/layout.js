@@ -18,7 +18,7 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 export const metadata = {
-  title: "Gautham Ram U M | Full-Stack & Web3 Engineer",
+  title: "Gautham Ram U M | Web dev & Andriod APP dev Engineer + AI/ML & Blockchain Engineer",
   description: "I build production-grade applications that bridge Web2 usability with Web3 trust.",
 };
 

@@ -129,6 +129,11 @@ export default function ProjectsCarousel({ projects }) {
                             View on GitHub
                         </a>
                     )}
+                    {projects[activeIndex].live && (
+                        <a href={projects[activeIndex].live} target="_blank" rel="noreferrer" className="neo-btn-outline px-6">
+                            {projects[activeIndex].liveText || "Live Demo"}
+                        </a>
+                    )}
                 </div>
             </div>
         </div>
