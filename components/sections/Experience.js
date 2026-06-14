@@ -56,16 +56,16 @@ export default function Experience({ workExperience }) {
                     <span className="text-[var(--color-primary)]">EXPERIENCE</span>
                 </h2>
 
-                <div ref={containerRef} className="flex flex-col items-center justify-center max-w-4xl mx-auto">
+                <div ref={containerRef} className="flex flex-col items-center justify-center max-w-6xl mx-auto">
                     {/* Centered Experience Cards */}
-                    <div className="w-full space-y-8">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-8 w-full">
                         {workExperience.map((exp, idx) => (
-                            <div key={idx} className="exp-card w-full">
-                                <div className="bg-[var(--color-background)]/80 backdrop-blur-md border-4 border-[var(--color-border)] rounded-2xl shadow-[8px_8px_0_var(--color-shadow)] p-8 md:p-10 group hover:-translate-y-2 hover:translate-x-2 transition-transform duration-300 relative overflow-hidden">
+                            <div key={idx} className="exp-card w-full h-full">
+                                <div className="bg-[var(--color-background)]/80 backdrop-blur-md border-4 border-[var(--color-border)] rounded-2xl shadow-[8px_8px_0_var(--color-shadow)] p-8 md:p-10 group hover:-translate-y-2 hover:translate-x-2 transition-transform duration-300 relative overflow-hidden h-full flex flex-col">
 
                                     <div className="absolute -right-10 -top-10 w-40 h-40 bg-[var(--color-primary)]/10 rounded-full blur-2xl group-hover:bg-[var(--color-secondary)]/20 transition-colors duration-500"></div>
 
-                                    <div className="inline-block px-4 py-2 bg-[var(--color-primary)] text-white font-[var(--font-code)] font-bold text-sm border-2 border-[var(--color-border)] rounded-lg shadow-[2px_2px_0_var(--color-shadow)] mb-6 transform -rotate-2">
+                                    <div className="inline-block px-4 py-2 bg-[var(--color-primary)] text-white font-[var(--font-code)] font-bold text-sm border-2 border-[var(--color-border)] rounded-lg shadow-[2px_2px_0_var(--color-shadow)] mb-6 transform -rotate-2 w-fit">
                                         {exp.period}
                                     </div>
 
@@ -79,7 +79,7 @@ export default function Experience({ workExperience }) {
                                         <span className="hidden md:block">{exp.location}</span>
                                     </div>
 
-                                    <ul className="space-y-4 text-[var(--color-text-primary)] font-medium leading-relaxed font-[var(--font-inter)]">
+                                    <ul className="space-y-4 text-[var(--color-text-primary)] font-medium leading-relaxed font-[var(--font-inter)] mt-auto">
                                         {exp.points.map((pt, i) => (
                                             <li key={i} className="flex items-start gap-4">
                                                 <span className="flex-shrink-0 mt-2 w-2 h-2 rounded-sm border border-[var(--color-border)] bg-[var(--color-accent)] transform rotate-45"></span>

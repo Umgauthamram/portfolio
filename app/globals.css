@@ -19,6 +19,15 @@
 
   --animate-spin-slow: spin 20s linear infinite;
   --animate-pulse-slow: pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+
+  @keyframes parallax_fg {
+    0% { background-position: 2765px 100%; }
+    100% { background-position: 550px 100%; }
+  }
+  @keyframes parallax_bike {
+    0% { background-position: -300px 100%; }
+    100% { background-position: 2000px 100%; }
+  }
 }
 
 @layer base {
