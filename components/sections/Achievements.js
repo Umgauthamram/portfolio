@@ -26,15 +26,19 @@ export default function Achievements({ achievements }) {
         );
     }, []);
 
-    // Sort so hackathons are first, then other achievements
+    // Sort so hackathons and fellowships are first, then other achievements
     const sortedAchievements = [
         ...achievements.filter(
             ach => ach.title.toLowerCase().includes("hackathon") || 
-                   ach.description.toLowerCase().includes("hackathon")
+                   ach.description.toLowerCase().includes("hackathon") ||
+                   ach.title.toLowerCase().includes("fellowship") ||
+                   ach.description.toLowerCase().includes("fellowship")
         ),
         ...achievements.filter(
             ach => !ach.title.toLowerCase().includes("hackathon") && 
-                   !ach.description.toLowerCase().includes("hackathon")
+                   !ach.description.toLowerCase().includes("hackathon") &&
+                   !ach.title.toLowerCase().includes("fellowship") &&
+                   !ach.description.toLowerCase().includes("fellowship")
         )
     ];
 
