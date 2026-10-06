@@ -76,7 +76,7 @@ export default function Hero({ personalInfo }) {
                         <a href="#projects" className="neo-btn bg-[var(--color-text-primary)] text-[var(--color-background)] border-[var(--color-text-primary)] hover:bg-[var(--color-primary)] hover:text-white text-lg px-8 py-4">
                             View Projects
                         </a>
-                        <a href="/Gautham Ram U M.pdf" download="Gautham Ram U M Resume" className="neo-btn-outline bg-white/20 backdrop-blur-sm border-white text-white hover:bg-white hover:text-black text-lg px-8 py-4">
+                        <a href="/GauthamRam.pdf" download="GauthamRam_Resume.pdf" className="neo-btn-outline bg-white/20 backdrop-blur-sm border-white text-white hover:bg-white hover:text-black text-lg px-8 py-4">
                             Resume
                         </a>
                     </div>
