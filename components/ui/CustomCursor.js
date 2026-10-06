@@ -1,42 +1,46 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import gsap from "gsap";
 
 export default function CustomCursor() {
     const followerRef = useRef(null);
-    const [isHovering, setIsHovering] = useState(false);
 
     useEffect(() => {
+        // Only activate custom cursor on desktop devices with a mouse/trackpad
+        if (typeof window === "undefined" || !window.matchMedia("(pointer: fine)").matches) {
+            return;
+        }
+
         const follower = followerRef.current;
         if (!follower) return;
 
-        // Apply initial centering and ensure basic display
         gsap.set(follower, { xPercent: -50, yPercent: -50 });
-        document.body.style.cursor = 'none';
+        document.body.style.cursor = "none";
+
+        // High-performance quickTo setters avoid creating new tweens on every mousemove event
+        const setX = gsap.quickTo(follower, "x", { duration: 0.12, ease: "power2" });
+        const setY = gsap.quickTo(follower, "y", { duration: 0.12, ease: "power2" });
 
         const moveCursor = (e) => {
-            gsap.to(follower, {
-                x: e.clientX,
-                y: e.clientY,
-                duration: 0.15,
-                ease: "power2.out"
-            });
+            setX(e.clientX);
+            setY(e.clientY);
         };
 
         const handleMouseOver = (e) => {
-            if (e.target.tagName?.toLowerCase() === 'a' || e.target.tagName?.toLowerCase() === 'button' || e.target.closest('a') || e.target.closest('button')) {
-                setIsHovering(true);
+            const isClickable = e.target.closest("a, button, [role='button'], input, textarea, select");
+            if (isClickable) {
+                follower.classList.add("cursor-hover");
             } else {
-                setIsHovering(false);
+                follower.classList.remove("cursor-hover");
             }
         };
 
-        window.addEventListener("mousemove", moveCursor);
-        window.addEventListener("mouseover", handleMouseOver);
+        window.addEventListener("mousemove", moveCursor, { passive: true });
+        window.addEventListener("mouseover", handleMouseOver, { passive: true });
 
         return () => {
-            document.body.style.cursor = 'auto';
+            document.body.style.cursor = "auto";
             window.removeEventListener("mousemove", moveCursor);
             window.removeEventListener("mouseover", handleMouseOver);
         };
@@ -45,8 +49,7 @@ export default function CustomCursor() {
     return (
         <div
             ref={followerRef}
-            className={`fixed top-0 left-0 w-6 h-6 rounded-full pointer-events-none z-[9999] transition-colors duration-200 border-4 border-[var(--color-border)] ${isHovering ? 'scale-[2.5] bg-[var(--color-primary)] shadow-[4px_4px_0_var(--color-shadow)]' : 'scale-100 bg-[var(--color-secondary)] shadow-[2px_2px_0_var(--color-shadow)]'}`}
-            style={{ opacity: isHovering ? 0.8 : 1 }}
+            className="fixed top-0 left-0 w-6 h-6 rounded-full pointer-events-none z-[9999] transition-transform transition-colors duration-150 border-4 border-[var(--color-border)] bg-[var(--color-secondary)] shadow-[2px_2px_0_var(--color-shadow)] will-change-transform [&.cursor-hover]:scale-[2.2] [&.cursor-hover]:bg-[var(--color-primary)] [&.cursor-hover]:opacity-80"
         />
     );
 }

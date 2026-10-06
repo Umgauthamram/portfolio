@@ -3,7 +3,6 @@
 import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import SkillsGlobe from "../three/SkillsGlobe";
 
 const ERC_DESCRIPTIONS = {
     "ERC-20": "Fungible Tokens",

@@ -39,6 +39,8 @@ const MountainVistaParallax = ({ title = "", subtitle = "" }) => {
                 animation-timing-function: linear;
                 animation-iteration-count: infinite;
                 filter: grayscale(100%) brightness(0.2) contrast(1.1);
+                transform: translateZ(0);
+                will-change: background-position;
             }
         `;
 

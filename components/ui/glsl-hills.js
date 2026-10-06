@@ -35,8 +35,9 @@ const GLSLHills = ({ width = "100%", height = "100%", cameraZ = 125, planeSize =
             }
 
             createMesh() {
+                // Optimized 64x64 segment grid for massive GPU/CPU speedup (4k vertices vs 65k)
                 return new THREE.Mesh(
-                    new THREE.PlaneGeometry(planeSize, planeSize, planeSize, planeSize),
+                    new THREE.PlaneGeometry(planeSize, planeSize, 64, 64),
                     new THREE.RawShaderMaterial({
                         uniforms: this.uniforms,
                         vertexShader: `
@@ -175,13 +176,15 @@ const GLSLHills = ({ width = "100%", height = "100%", cameraZ = 125, planeSize =
         let widthVal = container.clientWidth;
         let heightVal = container.clientHeight;
 
-        renderer = new THREE.WebGLRenderer({ canvas: canvasRef.current, antialias: true, alpha: true });
-        renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+        renderer = new THREE.WebGLRenderer({ canvas: canvasRef.current, antialias: false, alpha: true, powerPreference: "high-performance" });
+        renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.5));
         scene = new THREE.Scene();
         camera = new THREE.PerspectiveCamera(45, widthVal / heightVal, 1, 10000);
         clock = new THREE.Clock();
         plane = new Plane();
         planeRef.current = plane;
+
+        let isVisible = true;
 
         const resize = () => {
             if (!containerRef.current) return;
@@ -198,6 +201,7 @@ const GLSLHills = ({ width = "100%", height = "100%", cameraZ = 125, planeSize =
         };
 
         const renderLoop = () => {
+            if (!isVisible) return;
             render();
             animationFrameId = requestAnimationFrame(renderLoop);
         };
@@ -214,16 +218,32 @@ const GLSLHills = ({ width = "100%", height = "100%", cameraZ = 125, planeSize =
             });
             resizeObserver.observe(container);
 
+            // Pause WebGL rendering whenever the hero section is out of the viewport
+            const intersectionObserver = new IntersectionObserver(([entry]) => {
+                const nowVisible = entry.isIntersecting;
+                if (nowVisible && !isVisible) {
+                    isVisible = true;
+                    clock.getDelta(); // reset delta to prevent time jump
+                    renderLoop();
+                } else if (!nowVisible && isVisible) {
+                    isVisible = false;
+                    cancelAnimationFrame(animationFrameId);
+                }
+            }, { threshold: 0.05 });
+            intersectionObserver.observe(container);
+
             renderLoop();
 
             return () => {
                 resizeObserver.disconnect();
+                intersectionObserver.disconnect();
             };
         };
 
         const cleanupResize = init();
 
         return () => {
+            isVisible = false;
             cancelAnimationFrame(animationFrameId);
             cleanupResize();
             if (renderer) renderer.dispose();

@@ -2,43 +2,45 @@
 
 import { useEffect } from "react";
 import Lenis from "lenis";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 export default function SmoothScroll() {
     useEffect(() => {
-        // Prevent browser from restoring previous scroll position
-        if (typeof window !== 'undefined') {
-            window.history.scrollRestoration = 'manual';
-            window.scrollTo(0, 0);
-        }
+        if (typeof window === "undefined") return;
+
+        window.history.scrollRestoration = "manual";
+        window.scrollTo(0, 0);
+
+        gsap.registerPlugin(ScrollTrigger);
 
         const lenis = new Lenis({
-            duration: 1.2,
+            duration: 0.9,
             easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
             direction: "vertical",
             gestureDirection: "vertical",
             smooth: true,
-            mouseMultiplier: 1,
-            smoothTouch: false,
-            touchMultiplier: 2,
+            wheelMultiplier: 1.1,
+            touchMultiplier: 1.5,
             infinite: false,
         });
 
-        // Ensure Lenis also starts from the top
+        // Sync Lenis scroll with GSAP ScrollTrigger
+        lenis.on("scroll", ScrollTrigger.update);
+
+        // Drive Lenis through GSAP ticker for frame-perfect animation sync
+        const tickerCallback = (time) => {
+            lenis.raf(time * 1000);
+        };
+        gsap.ticker.add(tickerCallback);
+        gsap.ticker.lagSmoothing(0);
+
         lenis.scrollTo(0, { immediate: true });
 
-        function raf(time) {
-            lenis.raf(time);
-            requestAnimationFrame(raf);
-        }
-
-        requestAnimationFrame(raf);
-
         return () => {
+            gsap.ticker.remove(tickerCallback);
             lenis.destroy();
-            // Reset for other pages if needed
-            if (typeof window !== 'undefined') {
-                window.history.scrollRestoration = 'auto';
-            }
+            window.history.scrollRestoration = "auto";
         };
     }, []);
 

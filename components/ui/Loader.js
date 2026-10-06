@@ -26,23 +26,23 @@ export default function Loader() {
         gsap.set(word1InnerRef.current, { x: -w1 });
         gsap.set(word2InnerRef.current, { x: -w2 });
 
-        // The Sequence
-        tl.to({}, { duration: 0.8 }) // Hold initial "GR"
+        // Fast, high-energy sequence (~1.5s total)
+        tl.to({}, { duration: 0.25 }) // Quick initial "GR" catch
             .to([word1Ref.current, word2Ref.current], {
                 width: (i) => i === 0 ? w1 : w2,
-                duration: 1.4,
-                ease: "expo.out"
+                duration: 0.65,
+                ease: "power3.out"
             }, "reveal")
             .to([word1InnerRef.current, word2InnerRef.current], {
                 x: 0,
-                duration: 1.4,
-                ease: "expo.out"
+                duration: 0.65,
+                ease: "power3.out"
             }, "reveal")
-            .to({}, { duration: 1 }) // Hold the full "Gautham Ram."
+            .to({}, { duration: 0.35 }) // Short showcase hold
             .to(containerRef.current, {
                 yPercent: -100,
-                duration: 1,
-                ease: "expo.inOut"
+                duration: 0.6,
+                ease: "power4.inOut"
             });
 
         return () => tl.kill();
