@@ -15,30 +15,30 @@ export default function SmoothScroll() {
         gsap.registerPlugin(ScrollTrigger);
 
         const lenis = new Lenis({
-            duration: 0.9,
+            duration: 1.0,
             easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
             direction: "vertical",
             gestureDirection: "vertical",
             smooth: true,
-            wheelMultiplier: 1.1,
-            touchMultiplier: 1.5,
+            mouseMultiplier: 1,
+            smoothTouch: false,
+            touchMultiplier: 2,
             infinite: false,
         });
 
-        // Sync Lenis scroll with GSAP ScrollTrigger
         lenis.on("scroll", ScrollTrigger.update);
-
-        // Drive Lenis through GSAP ticker for frame-perfect animation sync
-        const tickerCallback = (time) => {
-            lenis.raf(time * 1000);
-        };
-        gsap.ticker.add(tickerCallback);
-        gsap.ticker.lagSmoothing(0);
-
         lenis.scrollTo(0, { immediate: true });
 
+        let rfId;
+        function raf(time) {
+            lenis.raf(time);
+            rfId = requestAnimationFrame(raf);
+        }
+
+        rfId = requestAnimationFrame(raf);
+
         return () => {
-            gsap.ticker.remove(tickerCallback);
+            cancelAnimationFrame(rfId);
             lenis.destroy();
             window.history.scrollRestoration = "auto";
         };
