@@ -12,6 +12,7 @@
   --color-text-muted: var(--text-muted);
   --color-shadow: var(--shadow);
   --color-border: var(--border-color);
+  --color-foreground: var(--text-primary);
 
   --font-heading: var(--font-space-grotesk);
   --font-body: var(--font-inter);
@@ -38,6 +39,7 @@
     --background: #fdfaf6;
     --surface: #ffffff;
     --text-primary: #121212;
+    --foreground: #121212;
     --text-muted: #52525b;
     --shadow: rgba(0, 0, 0, 0.1);
     --border-color: #000000;
@@ -51,6 +53,7 @@
     --background: #09090b;
     --surface: #18181b;
     --text-primary: #f4f4f5;
+    --foreground: #f4f4f5;
     --text-muted: #a1a1aa;
     --shadow: rgba(0, 0, 0, 0.6);
     --border-color: #52525b;

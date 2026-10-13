@@ -18,9 +18,9 @@ export default function CustomCursor() {
         gsap.set(follower, { xPercent: -50, yPercent: -50 });
         document.body.style.cursor = "none";
 
-        // High-performance quickTo setters avoid creating new tweens on every mousemove event
-        const setX = gsap.quickTo(follower, "x", { duration: 0.12, ease: "power2" });
-        const setY = gsap.quickTo(follower, "y", { duration: 0.12, ease: "power2" });
+        // High-performance quickTo setters with near-instant response (no floaty lag)
+        const setX = gsap.quickTo(follower, "x", { duration: 0.02, ease: "power2.out" });
+        const setY = gsap.quickTo(follower, "y", { duration: 0.02, ease: "power2.out" });
 
         const moveCursor = (e) => {
             setX(e.clientX);
@@ -49,7 +49,9 @@ export default function CustomCursor() {
     return (
         <div
             ref={followerRef}
-            className="fixed top-0 left-0 w-6 h-6 rounded-full pointer-events-none z-[9999] transition-transform transition-colors duration-150 border-4 border-[var(--color-border)] bg-[var(--color-secondary)] shadow-[2px_2px_0_var(--color-shadow)] will-change-transform [&.cursor-hover]:scale-[2.2] [&.cursor-hover]:bg-[var(--color-primary)] [&.cursor-hover]:opacity-80"
-        />
+            className="fixed top-0 left-0 pointer-events-none z-[9999] will-change-transform"
+        >
+            <div className="w-6 h-6 rounded-full border-4 border-[var(--color-border)] bg-[var(--color-secondary)] shadow-[2px_2px_0_var(--color-shadow)] transition-all duration-150 ease-out [.cursor-hover_&]:scale-[2] [.cursor-hover_&]:bg-[var(--color-primary)] [.cursor-hover_&]:opacity-80" />
+        </div>
     );
 }

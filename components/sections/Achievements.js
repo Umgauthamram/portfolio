@@ -3,7 +3,7 @@
 import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import MountainVistaParallax from "../ui/mountain-vista-bg";
+import { GridPulse } from "../ui/grid-pulse";
 
 export default function Achievements({ achievements }) {
     const sectionRef = useRef(null);
@@ -76,12 +76,19 @@ export default function Achievements({ achievements }) {
     };
 
     return (
-        <section id="achievements" ref={sectionRef} className="py-32 bg-gradient-to-b from-[#09090b] via-[#121214] to-[#09090b] relative overflow-hidden border-t-4 border-b-4 border-[var(--color-border)]">
-            {/* Parallax Background */}
-            <MountainVistaParallax />
+        <section
+            id="achievements"
+            ref={sectionRef}
+            className="py-32 bg-[var(--color-background)] text-[var(--color-text-primary)] relative overflow-hidden border-t-4 border-b-4 border-[var(--color-border)] transition-colors duration-300"
+        >
+            {/* Interactive GridPulse Background */}
+            <GridPulse />
 
             <div className="max-w-[1400px] mx-auto px-6 text-center relative z-10">
-                <h2 className="text-5xl md:text-7xl font-[var(--font-heading)] font-black mb-16 text-white tracking-tight drop-shadow-md">
+                <h2
+                    data-grid-avoid
+                    className="text-5xl md:text-7xl font-[var(--font-heading)] font-black mb-16 text-[var(--color-text-primary)] tracking-tight drop-shadow-md"
+                >
                     Key <span className="text-[var(--accent)]">Achievements</span>
                 </h2>
 
